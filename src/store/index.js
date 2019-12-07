@@ -1,22 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import TYPE from '../lib/definitions'
 
 Vue.use(Vuex)
 
 const state = {
-  TYPE: {
-    ALL: '全て',
-    DOING: '作業中',
-    DONE: '完了'
-  },
   _todos: [],
   _radioType: ''
 }
 
 const getters = {
-  typeAll: state => state.TYPE.ALL,
-  typeDoing: state => state.TYPE.DOING,
-  typeDone: state => state.TYPE.DONE,
   todos: state => {
     // _todosをコピーして画面表示用idを付与したtodosを作成
     const todos = JSON.parse(JSON.stringify(state._todos))
@@ -24,7 +17,7 @@ const getters = {
       todo.id = index + 1
     })
     // _radioTypeが初期値かALLの時todosを返す
-    if (state._radioType === '' || state._radioType === state.TYPE.ALL) {
+    if (state._radioType === '' || state._radioType === TYPE.ALL) {
       return todos
     } else {
       // _radioTypeに応じたstatusのtodosを返す
@@ -54,7 +47,7 @@ const mutations = {
   addTodo(state, item) {
     const todo = {
       task: item,
-      status: state.TYPE.DOING
+      status: TYPE.DOING
     }
     state._todos.push(todo)
   },
@@ -63,9 +56,9 @@ const mutations = {
   },
   changeTodoStatus(state, index) {
     state._todos[index].status =
-      state._todos[index].status === state.TYPE.DOING
-        ? state.TYPE.DONE
-        : state.TYPE.DOING
+      state._todos[index].status === TYPE.DOING
+        ? TYPE.DONE
+        : TYPE.DOING
   },
   changeRadioType(state, radioType) {
     state._radioType = radioType

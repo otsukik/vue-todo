@@ -26,16 +26,18 @@
 </template>
 
 <script>
+import TYPE from '../lib/definitions'
+
 export default {
   computed: {
     typeAll() {
-      return this.$store.getters.typeAll
+      return TYPE.ALL
     },
     typeDoing() {
-      return this.$store.getters.typeDoing
+      return TYPE.DOING
     },
     typeDone() {
-      return this.$store.getters.typeDone
+      return TYPE.DONE
     }
   },
   methods: {
